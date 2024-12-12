@@ -44,4 +44,36 @@ public class WatchTower
 
     }
 
+    public void SolutionTwo()
+    {
+
+        Console.Write("Input X coordinate: ");
+        int.TryParse(Console.ReadLine(), out int x);
+        Console.Write("Input Y coordinate: ");
+        int.TryParse(Console.ReadLine(), out int y);
+
+        string direction = "";
+
+        direction = y switch
+        {
+            < 0 => "S",
+            > 0 => "N",
+            _ => ""
+        };
+
+        direction += x switch
+        {
+            < 0 => "W",
+            > 0 => "E",
+            _ => ""
+        };
+
+        if (direction != "")
+            Console.WriteLine($"Enemy is in the {direction} direction");
+        else
+        {
+            Console.WriteLine("Behind you bruh");
+        }
+
+    }
 }
