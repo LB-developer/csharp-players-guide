@@ -5,6 +5,8 @@ public class BuyingInventory
     public void Solution()
     {
 
+        Console.Write("What is your name?: ");
+        var customerName = Console.ReadLine();
         // Prices
         var menu = new Dictionary<string, Tuple<string, int>>
         {
@@ -31,7 +33,7 @@ public class BuyingInventory
         }
         };
 
-        Console.WriteLine("The following items are available: ");
+        Console.WriteLine($"The following items are available for you {customerName}: ");
         foreach (var item in menu)
         {
             string index = item.Key;
@@ -43,8 +45,14 @@ public class BuyingInventory
         Console.Write("What number do you want to see the price of: ");
         var wantedItem = Console.ReadLine() ?? "";
 
-        Console.WriteLine($"{menu[wantedItem].Item1} costs {menu[wantedItem].Item2} gold");
-
+        if (customerName == "Logan")
+        {
+            Console.WriteLine($"{menu[wantedItem].Item1} costs {menu[wantedItem].Item2 / 2} gold which has a 50% discount!");
+        }
+        else
+        {
+            Console.WriteLine($"{menu[wantedItem].Item1} costs {menu[wantedItem].Item2} gold");
+        }
 
     }
 }
