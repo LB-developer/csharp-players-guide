@@ -13,7 +13,7 @@ public class ConsolasAndTelim
 
         Console.WriteLine(greeting);
         Console.WriteLine(question);
-        while (string.IsNullOrWhiteSpace(name = Console.ReadLine()))
+        while (string.IsNullOrWhiteSpace(name = Console.ReadLine() ?? ""))
         {
 
             Console.WriteLine("Please enter a valid name");
