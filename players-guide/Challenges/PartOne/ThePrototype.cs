@@ -18,11 +18,11 @@ public class ThePrototype
         // User 2 guesses the number until they get the correct answer
         do
         {
-            Console.Write("User 2, guess the number: ");
-            int.TryParse(Console.ReadLine(), out guess);
+            string instruction = "User 2, guess the number: ";
+
+            guess = AskForNumberInRange(instruction, 0, 100);
 
             string feedback;
-
             feedback = guess switch
             {
                 _ when guess > position => $"{guess} is too high",
@@ -36,6 +36,23 @@ public class ThePrototype
         } while (guess != position);
 
         Console.WriteLine("You guessed the number!");
+
+    }
+
+    private int AskForNumberInRange(string text, int min, int max)
+    {
+
+        int guess;
+        do
+        {
+
+            Console.Write(text);
+            int.TryParse(Console.ReadLine(), out guess);
+
+        } while (guess > max || guess < min || guess == 0);
+
+
+        return guess;
 
     }
 

@@ -7,14 +7,21 @@ public class TheReplicatorOfDTo
 
         int[] userNumbers = new int[5];
 
+        int AskForNumber(string text)
+        {
+            int response;
+            Console.WriteLine(text);
+            int.TryParse(Console.ReadLine(), out response);
+            return response;
+        }
         for (int i = 0; i < 5; i++)
         {
 
             int userGivenNumber;
 
-            Console.Write("Enter a number: ");
+            string instruction = "Enter a number:";
 
-            int.TryParse(Console.ReadLine(), out userGivenNumber);
+            userGivenNumber = AskForNumber(instruction);
 
             userNumbers[i] = userGivenNumber;
 
