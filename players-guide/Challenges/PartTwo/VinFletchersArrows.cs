@@ -3,9 +3,9 @@ namespace Challenges.PartTwo;
 public class VinFletchersArrows
 {
 
-    Arrowhead _arrowheadType;
-    Fletching _fletchingType;
-    int _length;
+    private Arrowhead _arrowheadType;
+    private Fletching _fletchingType;
+    private int _length;
 
     public VinFletchersArrows(Arrowhead arrowheadType, Fletching fletchingType, int length)
     {
@@ -13,6 +13,9 @@ public class VinFletchersArrows
         _fletchingType = fletchingType;
         _length = length;
     }
+
+    public Arrowhead GetArrowheadType() => _arrowheadType;
+    public Fletching GetFletchingType() => _fletchingType;
 
     public float GetCost()
     {
@@ -35,6 +38,7 @@ public class VinFletchersArrows
         return arrowCost + fletchingCost;
 
     }
+
 
     public enum Arrowhead
     {
