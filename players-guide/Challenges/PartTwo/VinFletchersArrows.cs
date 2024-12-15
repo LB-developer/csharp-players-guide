@@ -1,11 +1,13 @@
 namespace Challenges.PartTwo;
 
+
+
 public class VinFletchersArrows
 {
 
-    private Arrowhead _arrowheadType;
-    private Fletching _fletchingType;
-    private int _length;
+    private Arrowhead _arrowheadType { get; init; }
+    private Fletching _fletchingType { get; init; }
+    private int _length { get; init; }
 
     public VinFletchersArrows(Arrowhead arrowheadType, Fletching fletchingType, int length)
     {
