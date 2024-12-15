@@ -16,8 +16,20 @@ public class VinFletchersArrows
         _length = length;
     }
 
-    public Arrowhead GetArrowheadType() => _arrowheadType;
-    public Fletching GetFletchingType() => _fletchingType;
+    public static VinFletchersArrows CreateEliteArrow()
+    {
+        return new VinFletchersArrows(Arrowhead.Steel, Fletching.Plastic, 95);
+    }
+
+    public static VinFletchersArrows CreateBeginnerArrow()
+    {
+        return new VinFletchersArrows(Arrowhead.Wood, Fletching.Goose_Feathers, 75);
+    }
+
+    public static VinFletchersArrows CreateMarksmanArrow()
+    {
+        return new VinFletchersArrows(Arrowhead.Steel, Fletching.Goose_Feathers, 65);
+    }
 
     public float GetCost()
     {
