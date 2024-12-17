@@ -50,6 +50,14 @@ public class Door
             _ => false
         };
     }
+
+    public bool OpenDoor()
+    {
+
+        return true;
+    }
+
+
     public enum State
     {
         Locked,
