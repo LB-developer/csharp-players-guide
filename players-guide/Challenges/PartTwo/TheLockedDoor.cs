@@ -3,8 +3,8 @@ namespace Challenges.PartTwo;
 public class Door
 {
 
-    State _state { get; }
-    Status _status { get; }
+    public State _state { get; private set; }
+    public Status _status { get; private set; }
     private int _passcode;
 
 
@@ -54,7 +54,22 @@ public class Door
     public bool OpenDoor()
     {
 
-        return true;
+        if (this._state == State.Unlocked)
+        {
+            switch (this._status)
+            {
+                case Status.Open:
+                    Console.WriteLine("The door is already open...");
+                    return false;
+                case Status.Closed:
+                    this._status = Status.Open;
+                    return true;
+            }
+        }
+
+
+        Console.WriteLine("You need to unlock the door before you open it... (GuessPasscode)");
+        return false;
     }
 
 
