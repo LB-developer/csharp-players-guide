@@ -8,11 +8,17 @@ public class Door
     private int _passcode;
 
 
-    public Door(int passcode)
+    public Door()
     {
         _state = State.Locked;
         _status = Status.Closed;
-        _passcode = passcode;
+
+        Console.Write("Set the passcode: ");
+        if (!int.TryParse(Console.ReadLine(), out _passcode))
+        {
+            throw new FormatException("User input was not a valid int");
+        }
+
     }
 
     public string UnlockDoor()
@@ -36,6 +42,12 @@ public class Door
         return response;
     }
 
+    public void LockDoor()
+    {
+        this._state = State.Locked;
+        Console.WriteLine("You locked the door!");
+    }
+
     private bool GuessPasscode()
     {
         int guess;
@@ -43,11 +55,15 @@ public class Door
         Console.Write("Enter the passcode: ");
         int.TryParse(Console.ReadLine(), out guess);
 
-        return guess switch
+        switch (guess)
         {
-            _ when guess == this._passcode => true,
-            _ => false
-        };
+            case int when guess == this._passcode:
+                this._state = State.Unlocked;
+                return true;
+
+            default:
+                return false;
+        }
     }
 
     private bool ChangePasscode()
@@ -80,14 +96,27 @@ public class Door
                     Console.WriteLine("The door is already open...");
                     return false;
                 case Status.Closed:
+                    Console.WriteLine("You opened the door.");
                     this._status = Status.Open;
                     return true;
             }
         }
 
-
         Console.WriteLine("You need to unlock the door before you open it... (GuessPasscode)");
         return false;
+    }
+
+    public void CloseDoor()
+    {
+        if (this._status == Status.Closed)
+        {
+            Console.WriteLine("The door is already closed.");
+            return;
+        }
+
+        this._status = Status.Closed;
+        Console.WriteLine("You closed the door.");
+        return;
     }
 
 
