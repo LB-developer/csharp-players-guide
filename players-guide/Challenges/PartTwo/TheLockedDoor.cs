@@ -31,7 +31,6 @@ public class Door
                 ? "You have unlocked the door!"
                 : "Incorrect passcode",
             _ => throw new Exception()
-
         };
 
         return response;
@@ -49,6 +48,25 @@ public class Door
             _ when guess == this._passcode => true,
             _ => false
         };
+    }
+
+    private bool ChangePasscode()
+    {
+        if (this.GuessPasscode())
+        {
+            int guess;
+
+            Console.Write("Enter new password: ");
+            if (!int.TryParse(Console.ReadLine(), out guess))
+            {
+                throw new FormatException("User input was not a valid int");
+            }
+
+            this._passcode = guess;
+            return true;
+        }
+
+        return false;
     }
 
     public bool OpenDoor()
