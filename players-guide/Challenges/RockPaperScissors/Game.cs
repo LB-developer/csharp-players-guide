@@ -4,11 +4,15 @@ public class Game
 {
     public int PlayerOneScore { get; private set; } = 0;
     public int PlayerTwoScore { get; private set; } = 0;
+    public int GameDraws { get; private set; } = 0;
+
 
     private int PlayerTurn = 1;
 
     private DecisionPasser _decisionPasser = new DecisionPasser();
     private Option? _lastDecision;
+
+    public void GetHistoryForPlayer(int player) => _decisionPasser.DisplayHistory(player);
 
     public void StartPlaying()
     {
@@ -52,6 +56,7 @@ public class Game
                 if (playerTwoOption == Option.Rock)
                 {
                     announcePlayed();
+                    GameDraws++;
                     Console.WriteLine("The match was a draw!");
                     break;
                 }
@@ -87,6 +92,7 @@ public class Game
                 else
                 {
                     announcePlayed();
+                    GameDraws++;
                     Console.WriteLine("The match was a draw!");
                     break;
                 }
@@ -101,6 +107,7 @@ public class Game
                 else if (playerTwoOption == Option.Scissors)
                 {
                     announcePlayed();
+                    GameDraws++;
                     Console.WriteLine("The match was a draw!");
                     break;
                 }

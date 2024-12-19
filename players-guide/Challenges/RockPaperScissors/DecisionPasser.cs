@@ -24,10 +24,10 @@ internal class DecisionPasser()
 
     internal Option GetDecision(int playerTurn)
     {
-        int i = 0;
+        int i = 1;
         int userSelection = 0;
 
-        Console.WriteLine("Choices------");
+        Console.WriteLine("Choices: ");
         foreach (var item in Enum.GetValues<Option>())
         {
             Console.WriteLine($"{i}: {item}");
@@ -36,10 +36,10 @@ internal class DecisionPasser()
 
         do
         {
-            Console.Write("Please enter your choice (1-3): ");
+            Console.Write($"Player {playerTurn} - Please enter your choice (1-3): ");
             int.TryParse(Console.ReadLine(), out userSelection);
 
-        } while (userSelection != 1 || userSelection != 2 || userSelection != 3);
+        } while (userSelection != 1 && userSelection != 2 && userSelection != 3);
 
 
         switch (userSelection)
