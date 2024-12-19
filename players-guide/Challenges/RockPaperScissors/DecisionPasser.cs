@@ -41,5 +41,21 @@ internal class DecisionPasser()
         throw new Exception();
     }
 
+    private void NoteDecision(Option decision, int player)
+    {
+        switch (player)
+        {
+            case 1:
+                PlayerOneDecisions.Add(decision);
+                break;
+            case 2:
+                PlayerTwoDecisions.Add(decision);
+                break;
+            default:
+                return;
+
+        };
+    }
+
 
 }
