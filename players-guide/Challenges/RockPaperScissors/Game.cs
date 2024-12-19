@@ -17,6 +17,8 @@ public class Game
     {
         Option playerDecision = _decisionPasser.GetDecision(PlayerTurn);
 
+        if (currentPlayerTurn == 1)
+            NewRound();
 
 
         if (PlayerTurn == 1)
@@ -30,6 +32,10 @@ public class Game
         this.PlayRound(PlayerTurn);
     }
 
+    private void NewRound()
+    {
+        _lastDecision = null;
+    }
 
 
 
