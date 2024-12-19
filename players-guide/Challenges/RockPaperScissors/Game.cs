@@ -6,7 +6,9 @@ public class Game
     public int PlayerTwoScore { get; private set; } = 0;
 
     private int PlayerTurn = 1;
+
     private DecisionPasser _decisionPasser = new DecisionPasser();
+    private Option? _lastDecision;
 
     public void StartPlaying()
     {
@@ -15,20 +17,22 @@ public class Game
 
     private void PlayRound(int currentPlayerTurn)
     {
-        Option playerDecision = _decisionPasser.GetDecision(PlayerTurn);
-
         if (currentPlayerTurn == 1)
             NewRound();
 
+        Option playerDecision = _decisionPasser.GetDecision(PlayerTurn);
 
-        if (PlayerTurn == 1)
+        if (_lastDecision is Option decision)
         {
-            PlayerTurn = 2;
+            EvaluateWinner(decision, playerDecision);
         }
-        else
+
+        _lastDecision = playerDecision;
+        PlayerTurn = PlayerTurn switch
         {
-            PlayerTurn = 1;
-        }
+            1 => 2,
+            _ => 1
+        };
         this.PlayRound(PlayerTurn);
     }
 
@@ -36,6 +40,81 @@ public class Game
     {
         _lastDecision = null;
     }
+
+    private void EvaluateWinner(Option playerOneOption, Option playerTwoOption)
+    {
+        void announcePlayed() => Console.WriteLine($"Player 1 played {playerOneOption} -- Player 2 played {playerTwoOption}");
+
+
+        switch (playerOneOption)
+        {
+            case Option.Rock:
+                if (playerTwoOption == Option.Rock)
+                {
+                    announcePlayed();
+                    Console.WriteLine("The match was a draw!");
+                    break;
+                }
+                else if (playerTwoOption == Option.Paper)
+                {
+                    announcePlayed();
+                    PlayerTwoScore++;
+                    Console.WriteLine("Player Two Wins!");
+                    break;
+                }
+                else
+                {
+                    announcePlayed();
+                    PlayerOneScore++;
+                    Console.WriteLine("Player One Wins!");
+                    break;
+                }
+            case Option.Paper:
+                if (playerTwoOption == Option.Rock)
+                {
+                    announcePlayed();
+                    PlayerOneScore++;
+                    Console.WriteLine("Player One Wins!");
+                    break;
+                }
+                else if (playerTwoOption == Option.Scissors)
+                {
+                    announcePlayed();
+                    PlayerTwoScore++;
+                    Console.WriteLine("Player Two Wins!");
+                    break;
+                }
+                else
+                {
+                    announcePlayed();
+                    Console.WriteLine("The match was a draw!");
+                    break;
+                }
+            case Option.Scissors:
+                if (playerTwoOption == Option.Rock)
+                {
+                    announcePlayed();
+                    PlayerTwoScore++;
+                    Console.WriteLine("Player Two Wins!");
+                    break;
+                }
+                else if (playerTwoOption == Option.Scissors)
+                {
+                    announcePlayed();
+                    Console.WriteLine("The match was a draw!");
+                    break;
+                }
+                else
+                {
+                    announcePlayed();
+                    PlayerOneScore++;
+                    Console.WriteLine("Player One Wins!");
+                    break;
+                }
+        }
+    }
+
+
 
 
 
