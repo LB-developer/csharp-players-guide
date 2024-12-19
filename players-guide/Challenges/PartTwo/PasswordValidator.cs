@@ -6,13 +6,17 @@ public class PasswordValidator
     public bool IsValid()
     {
         string password = "";
-
+        bool isLengthValid;
+        bool isCasingValid;
         do
         {
             Console.Write("Enter a password for validation: ");
             password = Console.ReadLine() ?? "";
 
-        } while (!CheckLength(password) && !CheckCasing(password));
+            isLengthValid = CheckLength(password);
+            isCasingValid = CheckCasing(password);
+
+        } while (!isLengthValid || !isCasingValid);
 
         Console.WriteLine("That password is valid!");
         return true;
@@ -53,10 +57,6 @@ public class PasswordValidator
             }
 
         }
-
-        Console.WriteLine(uppercaseLetters);
-        Console.WriteLine(lowercaseLetters);
-        Console.WriteLine(digits);
 
         if (uppercaseLetters >= 1 && lowercaseLetters >= 1 && digits >= 1)
         {
