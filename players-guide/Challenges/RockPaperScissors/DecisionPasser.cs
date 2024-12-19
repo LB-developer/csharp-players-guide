@@ -5,6 +5,23 @@ internal class DecisionPasser()
     List<Option> PlayerOneDecisions = new List<Option>();
     List<Option> PlayerTwoDecisions = new List<Option>();
 
+    internal void DisplayHistory(int player)
+    {
+        List<Option> history;
+        history = player switch
+        {
+            1 => PlayerOneDecisions,
+            2 => PlayerTwoDecisions,
+            _ => throw new ArgumentException("Player must be 1 or 2")
+        };
+
+        for (int turn = 0; turn < history.Count; turn++)
+        {
+            Option decision = history[turn];
+            Console.WriteLine($"Turn #{turn} | Decision: {decision}");
+        }
+    }
+
     internal Option GetDecision(int playerTurn)
     {
         int i = 0;
