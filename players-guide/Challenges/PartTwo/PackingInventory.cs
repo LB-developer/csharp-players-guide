@@ -38,6 +38,17 @@ public class Pack
         return true;
     }
 
+    public override string ToString()
+    {
+        string packContents = "Pack contains: ";
+        foreach (var item in Items)
+        {
+            packContents += item.ToString() + " ";
+        }
+
+        return packContents;
+    }
+
 }
 
 public class InventoryItem
@@ -51,6 +62,7 @@ public class InventoryItem
         _volume = volume;
     }
 
+
 }
 
 
@@ -60,12 +72,24 @@ public class Arrow : InventoryItem
     {
     }
 
+    public override string ToString()
+    {
+
+        return "Arrow";
+
+    }
 }
 
 public class Bow : InventoryItem
 {
     public Bow() : base(1, 4)
     {
+    }
+    public override string ToString()
+    {
+
+        return "Bow";
+
     }
 
 }
@@ -76,6 +100,12 @@ public class Rope : InventoryItem
     {
     }
 
+    public override string ToString()
+    {
+
+        return "Rope";
+
+    }
 }
 
 public class Water : InventoryItem
@@ -84,12 +114,24 @@ public class Water : InventoryItem
     {
     }
 
+    public override string ToString()
+    {
+
+        return "Water";
+
+    }
 }
 
 public class Food : InventoryItem
 {
     public Food() : base(1, 0.5)
     {
+    }
+    public override string ToString()
+    {
+
+        return "Food";
+
     }
 
 }
@@ -98,6 +140,12 @@ public class Sword : InventoryItem
 {
     public Sword() : base(5, 3)
     {
+    }
+    public override string ToString()
+    {
+
+        return "Sword";
+
     }
 
 }
