@@ -59,10 +59,6 @@ public class Robot
     }
 }
 
-public abstract class RobotCommand
-{
-    public abstract void Run(Robot robot);
-}
 
 
 public class OnCommand : IRobotCommand
