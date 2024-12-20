@@ -11,8 +11,30 @@ public class Pack
 
     List<InventoryItem> Items { get; set; } = new List<InventoryItem>();
 
+    public bool Add(InventoryItem item)
+    {
+        if (CurrentWeight + item._weight > WeightLimit)
+        {
+            Console.WriteLine("Adding the item would exceed the weight capacity of the pack.");
+            Console.WriteLine($"Current pack weight: {CurrentWeight}");
+            Console.WriteLine($"Item weight: {item._weight}");
+            Console.WriteLine($"Pack Limit: {WeightLimit}");
+            return false;
+        }
+
+        if (CurrentVolume + item._volume > VolumeLimit)
+        {
+            Console.WriteLine("Adding the item would exceed the volume of the pack.");
+            Console.WriteLine($"Current pack volume: {CurrentVolume}");
+            Console.WriteLine($"Item volume: {item._volume}");
+            Console.WriteLine($"Pack limit: {VolumeLimit}");
+            return false;
+        }
 
 
+        Items.Add(item);
+        return true;
+    }
 
 }
 
