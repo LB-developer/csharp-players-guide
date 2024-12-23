@@ -8,11 +8,31 @@ public class Game
 
     public Game()
     {
-        Rooms = new GameRoom[4, 4];
+
+        int difficulty = GetDifficultyFromUser();
+        Rooms = new GameRoom[difficulty, difficulty];
         Player = new Player(0, 0);
 
         this.InitializeBoard();
         this.StartGame();
+    }
+
+    private int GetDifficultyFromUser()
+    {
+        int selection;
+        do
+        {
+            int i = 1;
+            Console.WriteLine("Select game difficulty: ");
+            foreach (var difficultyOption in Enum.GetValues<Difficulty>())
+            {
+                Console.WriteLine(i + ". " + difficultyOption);
+                i++;
+            }
+        }
+        while (!int.TryParse(Console.ReadLine(), out selection) && selection < 1 && selection > 3);
+
+        return 2 + 2 * selection;
     }
 
     private void InitializeBoard()
@@ -61,6 +81,13 @@ public class Game
     {
         Normal,
         Fountain
+    }
+
+    enum Difficulty
+    {
+        Easy,
+        Medium,
+        Hard
     }
 
 }
