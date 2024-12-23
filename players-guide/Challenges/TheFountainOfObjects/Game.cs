@@ -13,7 +13,7 @@ public class Game
         Rooms = new GameRoom[difficulty, difficulty];
         Player = new Player(0, 0);
 
-        this.InitializeBoard();
+        this.InitializeBoard(difficulty);
         this.StartGame();
     }
 
@@ -23,7 +23,7 @@ public class Game
         do
         {
             int i = 1;
-            Console.WriteLine("Select game difficulty: ");
+            Console.WriteLine("Select game difficulty (1-3): ");
             foreach (var difficultyOption in Enum.GetValues<Difficulty>())
             {
                 Console.WriteLine(i + ". " + difficultyOption);
@@ -35,17 +35,28 @@ public class Game
         return 2 + 2 * selection;
     }
 
-    private void InitializeBoard()
+    private void InitializeBoard(int difficulty)
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < difficulty; i++)
         {
-            for (int j = 0; j < 4; j++)
+            for (int j = 0; j < difficulty; j++)
             {
                 this.Rooms[i, j] = GameRoom.Normal;
             }
         }
 
-        this.Rooms[0, 2] = GameRoom.Fountain;
+        var random = new Random();
+
+        int min = difficulty / 2;
+        int max = difficulty;
+
+        int row;
+        int col;
+
+        row = random.Next(min, max);
+        col = random.Next(min, max);
+
+        this.Rooms[row, col] = GameRoom.Fountain;
     }
 
     private void StartGame()
