@@ -10,10 +10,13 @@ public class Game
     {
 
         int difficulty = GetDifficultyFromUser();
-        Rooms = new GameRoom[difficulty, difficulty];
-        Player = new Player(0, 0);
 
-        this.InitializeBoard(difficulty);
+        this.Rooms = new GameRoom[difficulty, difficulty];
+
+        (int, int) fountainLocation = this.InitializeBoard(difficulty);
+
+        this.Player = new Player(0, 0, fountainLocation);
+
         this.StartGame();
     }
 
@@ -35,7 +38,7 @@ public class Game
         return 2 + 2 * selection;
     }
 
-    private void InitializeBoard(int difficulty)
+    private (int, int) InitializeBoard(int difficulty)
     {
         for (int i = 0; i < difficulty; i++)
         {
@@ -57,6 +60,7 @@ public class Game
         col = random.Next(min, max);
 
         this.Rooms[row, col] = GameRoom.Fountain;
+        return (row, col);
     }
 
     private void StartGame()
@@ -66,7 +70,7 @@ public class Game
         {
             this.StartNewRound();
             Player.GetPlayerAction();
-            if (this.Player.XLocation == 0 && this.Player.YLocation == 0 && this.Player.FountainEnabled)
+            if (this.Player._ColLocation == 0 && this.Player._RowLocation == 0 && this.Player._FountainEnabled)
             {
                 this.GameFinished = true;
             }
@@ -80,11 +84,17 @@ public class Game
     private void StartNewRound()
     {
         Console.WriteLine($"---------------------------");
-        Console.WriteLine($"You are the room at (Row={this.Player.YLocation}, Column={this.Player.XLocation})");
+        Console.WriteLine($"You are the room at (Row={this.Player._RowLocation}, Column={this.Player._ColLocation})");
 
-        if (this.Player.XLocation == 0 && this.Player.YLocation == 0)
+        if (
+                this.Player._RowLocation == 0
+                && this.Player._ColLocation == 0
+            )
             Console.WriteLine("You see light coming from the cavern entrance.");
-        else if (this.Player.XLocation == 2 && this.Player.YLocation == 0)
+        else if (
+                    this.Player._ColLocation == this.Player._FountainCol
+                    && this.Player._RowLocation == this.Player._FountainRow
+                )
             Console.WriteLine("You hear water dripping in this room. The Fountain of Objects is here!");
     }
 
