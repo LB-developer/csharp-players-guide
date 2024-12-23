@@ -2,14 +2,17 @@ namespace Challenges.TheFountainOfObjects;
 
 internal class Player
 {
-    internal int XLocation { get; private set; }
-    internal int YLocation { get; private set; }
-    internal bool FountainEnabled { get; private set; }
+    internal int _RowLocation { get; private set; }
+    internal int _ColLocation { get; private set; }
+    internal int _FountainRow { get; private set; }
+    internal int _FountainCol { get; private set; }
+    internal bool _FountainEnabled { get; private set; }
 
-    public Player(int x, int y)
+    public Player(int y, int x, (int, int) fountainLocation)
     {
-        XLocation = x;
-        YLocation = y;
+        _RowLocation = y;
+        _ColLocation = x;
+        (_FountainRow, _FountainCol) = fountainLocation;
     }
 
     internal void GetPlayerAction()
@@ -17,7 +20,7 @@ internal class Player
         bool validInstruction = false;
         do
         {
-            Console.Write("What do you want to do?  ");
+            Console.Write("What do you want to do? ");
             string? option;
             do
             {
@@ -42,9 +45,9 @@ internal class Player
             case "move south":
                 return this.MovePlayer(0, -1, "south");
             case "enable fountain":
-                if (this.XLocation == 2 && this.YLocation == 0)
+                if (this._RowLocation == this._FountainRow && this._ColLocation == this._FountainCol)
                 {
-                    this.FountainEnabled = true;
+                    this._FountainEnabled = true;
                     Console.WriteLine("You have activated the Fountain of Objects!");
                     return true;
                 }
@@ -59,27 +62,30 @@ internal class Player
         }
     }
 
+
     private bool MovePlayer(int x, int y, string direction)
     {
         // move x
-        if (this.XLocation + x > 4 || this.XLocation + x < 0)
+        // TODO: use the boundary
+        if (this._ColLocation + x > 4 || this._ColLocation + x < 0)
         {
             Console.WriteLine($"You are at the edge and cannot move {direction}, choose another move");
             return false;
         }
         else
         {
-            this.XLocation += x;
+            this._ColLocation += x;
         }
+
         // move y
-        if (this.YLocation + y > 4 || this.YLocation + y < 0)
+        if (this._RowLocation + y > 4 || this._RowLocation + y < 0)
         {
             Console.WriteLine($"You are at the edge and cannot move {direction}, choose another move");
             return false;
         }
         else
         {
-            this.YLocation += y;
+            this._RowLocation += y;
         }
 
         return true;
@@ -92,7 +98,7 @@ internal class Player
         Console.WriteLine("move south");
         Console.WriteLine("move east");
         Console.WriteLine("move west");
-        if (this.XLocation == 2 && this.YLocation == 0)
+        if (this._RowLocation == this._FountainRow && this._ColLocation == this._FountainCol)
             Console.WriteLine("enable fountain");
     }
 
