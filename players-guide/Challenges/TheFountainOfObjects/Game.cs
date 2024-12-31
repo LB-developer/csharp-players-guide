@@ -26,6 +26,7 @@ public class Game
                 Console.WriteLine(i + ". " + difficultyOption);
                 i++;
             }
+            Console.Write("Choice: ");
         }
         while (!int.TryParse(Console.ReadLine(), out selection) && selection < 1 && selection > 3);
 
