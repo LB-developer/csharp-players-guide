@@ -3,15 +3,18 @@ namespace Challenges.TheFountainOfObjects;
 public class Game
 {
     private Player _Player;
+    private Rooms _Rooms { get; }
+    private DateTime _TimeStarted { get; set; }
     private bool GameFinished = false;
     private int _Difficulty { get; set; }
-    private Rooms _Rooms { get; }
 
     public Game()
     {
         _Difficulty = GetDifficultyFromUser();
         _Rooms = new Rooms(_Difficulty);
         _Player = new Player(0, 0);
+        Console.WriteLine("row: " + _Rooms._FountainRow);
+        Console.WriteLine("col: " + _Rooms._FountainCol);
     }
 
     private int GetDifficultyFromUser()
@@ -36,6 +39,7 @@ public class Game
 
     public void StartGame()
     {
+        _TimeStarted = DateTime.Now;
 
         while (!GameFinished)
         {
@@ -60,6 +64,7 @@ public class Game
 
         Console.WriteLine("The Fountain of Objects has been reactivated, and, you have escaped with your life!");
         Console.WriteLine("You win!");
+        Console.WriteLine($"Time spent playing: {DateTime.Now - _TimeStarted}");
     }
 
     private void StartNewRound()
